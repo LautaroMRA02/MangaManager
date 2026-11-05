@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "languages": {
+        "preferred": [
+            "es",
+            "en",
+            "pt-br"
+        ],
+        "always_show_original": true
+    },
+    "downloads": {
+        "max_workers": 4,
+        "quality": "data"
+    }
+}

@@ -1,0 +1,210 @@
+{
+    "version": 2,
+    "mangas": [
+        {
+            "id": "79b1ece3-f4ec-4af5-a2ec-9cf8835a4567",
+            "titles": [
+                {
+                    "language": "ko",
+                    "name": "나 혼자만 레벨업",
+                    "original": true
+                },
+                {
+                    "language": "en",
+                    "name": "Solo Leveling",
+                    "original": false
+                },
+                {
+                    "language": "es",
+                    "name": "Solo Leveling",
+                    "original": false
+                },
+                {
+                    "language": "ja",
+                    "name": "俺だけレベルアップな件",
+                    "original": false
+                }
+            ],
+            "description": "Un cazador de rango bajo obtiene una misteriosa habilidad.",
+            "cover": null,
+            "status": "completed",
+            "sources": [],
+            "chapters": [
+                {
+                    "id": "9de5315c-61f7-415e-b331-a1b5ec2d2f5c",
+                    "number": "1",
+                    "title": "El comienzo",
+                    "versions": [
+                        {
+                            "id": "a793d1aa-4d94-4892-ad9f-1b03fadc9fc3",
+                            "language": "es",
+                            "source_id": "",
+                            "status": "completed",
+                            "pages_total": 20,
+                            "pages_downloaded": 20,
+                            "folder": ""
+                        },
+                        {
+                            "id": "f05d6a56-30ce-4474-957d-b01ac2dd8f93",
+                            "language": "en",
+                            "source_id": "",
+                            "status": "pending",
+                            "pages_total": 0,
+                            "pages_downloaded": 0,
+                            "folder": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "8c47b8a2-7b2f-43e5-a473-a6fdb1719bb4",
+                    "number": "2",
+                    "title": "El despertar",
+                    "versions": [
+                        {
+                            "id": "f469f494-3971-4a92-b4f1-86950f83ddcd",
+                            "language": "es",
+                            "source_id": "",
+                            "status": "pending",
+                            "pages_total": 0,
+                            "pages_downloaded": 0,
+                            "folder": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "9371a59b-3a6a-41a9-8485-aa448e901956",
+            "titles": [
+                {
+                    "language": "en",
+                    "name": "The Beginning After The End",
+                    "original": true
+                },
+                {
+                    "language": "es",
+                    "name": "El comienzo después del fin",
+                    "original": false
+                }
+            ],
+            "description": "La historia de un rey reencarnado en otro mundo.",
+            "cover": null,
+            "status": "ongoing",
+            "sources": [],
+            "chapters": []
+        },
+        {
+            "id": "a2aee52d-4727-4264-a658-d579037a60bb",
+            "titles": [
+                {
+                    "language": "es",
+                    "name": "test",
+                    "original": true
+                }
+            ],
+            "description": "",
+            "cover": null,
+            "status": "unknown",
+            "sources": [],
+            "chapters": []
+        },
+        {
+            "id": "29dc4d0c-aaa8-4729-8214-de6edea32e6a",
+            "titles": [
+                {
+                    "language": "en",
+                    "name": "Berserk",
+                    "original": false
+                }
+            ],
+            "description": "Guts, known as the Black Swordsman, seeks sanctuary from the demonic forces attracted to him and his woman because of a demonic mark on their necks, and also vengeance against the man who branded him as an unholy sacrifice. Aided only by his titanic strength gained from a harsh childhood lived with mercenaries, a gigantic sword, and an iron prosthetic left hand, Guts must struggle against his bleak destiny, all the while fighting with a rage that might strip him of his humanity.\n___\nWon the 6th Osamu Tezuka Cultural Prize Excellence Award in 2002.\n\nNote: Following Miura Kentarou's death in 2021, the series has been taken over by Kouji Mori, who supervises the series with art done by Studio Gaga.",
+            "cover": "library/covers/801513ba-a712-498c-8f57-cae55b38cc92.jpg",
+            "status": "unknown",
+            "sources": [
+                {
+                    "id": "801513ba-a712-498c-8f57-cae55b38cc92",
+                    "name": "MangaDex",
+                    "url": "https://mangadex.org/title/801513ba-a712-498c-8f57-cae55b38cc92"
+                }
+            ],
+            "chapters": []
+        },
+        {
+            "id": "34cee4dc-afa2-47d0-bf0a-988b7f346f31",
+            "titles": [
+                {
+                    "language": "en",
+                    "name": "Barbarian Quest",
+                    "original": false
+                },
+                {
+                    "language": "ko",
+                    "name": "바바리안 퀘스트",
+                    "original": false
+                },
+                {
+                    "language": "ru",
+                    "name": "Варварский Квест",
+                    "original": false
+                },
+                {
+                    "language": "pt-br",
+                    "name": "Missão Bárbara",
+                    "original": false
+                }
+            ],
+            "description": "When Urich's daring attempt to venture near the ominous Sky Mountains with his friends gets him kidnapped, he learns that there is a new world that exists beyond his own. \n\nAfter a hellish fight with his attackers, he frees himself and sets off on a journey to explore this new realm. There, he encounters allies and enemies alike, each meeting helping him learn more about the civilization and grow as a warrior. \n\nBut even Urich has yet to find out where his quest will truly take him...\n\n---\n\n- [Webtoon PV](https://www.youtube.com/watch?v=FJQwFVnatmw)",
+            "cover": "library/covers/cb114a5d-56ed-4288-a2ab-671a9d9702c4.jpg",
+            "status": "unknown",
+            "sources": [
+                {
+                    "id": "cb114a5d-56ed-4288-a2ab-671a9d9702c4",
+                    "name": "MangaDex",
+                    "url": "https://mangadex.org/title/cb114a5d-56ed-4288-a2ab-671a9d9702c4"
+                }
+            ],
+            "chapters": []
+        },
+        {
+            "id": "06f5650c-8a2b-4fe0-9fc8-198a16bb2f01",
+            "titles": [
+                {
+                    "language": "ja-ro",
+                    "name": "Shingeki no Kyojin - Rivetra Kiss XXX (Doujinshi)",
+                    "original": false
+                },
+                {
+                    "language": "ja",
+                    "name": "リヴァペト Kiss XXX (進撃の巨人)",
+                    "original": false
+                },
+                {
+                    "language": "ja-ro",
+                    "name": "Rivetra Kiss XXX (Shingeki no Kyojin)",
+                    "original": false
+                },
+                {
+                    "language": "es",
+                    "name": "Rivetra Beso XXX (Shingeki no Kyojin)",
+                    "original": false
+                },
+                {
+                    "language": "es-la",
+                    "name": "Rivetra Beso XXX (Shingeki no Kyojin) (Attack on titan)",
+                    "original": false
+                }
+            ],
+            "description": "",
+            "cover": "library/covers/b76d94b5-c787-46ff-9925-f4f729b1ed39.jpg",
+            "status": "unknown",
+            "sources": [
+                {
+                    "id": "b76d94b5-c787-46ff-9925-f4f729b1ed39",
+                    "name": "MangaDex",
+                    "url": "https://mangadex.org/title/b76d94b5-c787-46ff-9925-f4f729b1ed39"
+                }
+            ],
+            "chapters": []
+        }
+    ]
+}
