@@ -205,6 +205,42 @@
                 }
             ],
             "chapters": []
+        },
+        {
+            "id": "00fb4926-aabd-4a26-a671-988709e435dc",
+            "titles": [
+                {
+                    "language": "ja-ro",
+                    "name": "Suki na Hito ga Doushiyou mo Nai Hentai demo LoveCome Dekimasu ka?",
+                    "original": false
+                },
+                {
+                    "language": "en",
+                    "name": "Can you have a rom-com even if the person you love is a hopeless pervert",
+                    "original": false
+                },
+                {
+                    "language": "ja",
+                    "name": "好きな人がどうしようもない変態でもラブコメできますか？",
+                    "original": false
+                },
+                {
+                    "language": "es-la",
+                    "name": "¿Puedo vivir una comedia romántica aunque la persona que me gusta sea un pervertido incorregible?",
+                    "original": false
+                }
+            ],
+            "description": "Hajime Fudeoka, is a freshman college student who spent his high school years as an overlooked loner. Trying to hide his gloomy past, he loudly blurts out dirty jokes he’s not used to saying, such as “I wanna join a club and hook up with tons of girls!” and “Girls are just disposable, who cares!” As a result, everyone around him is totally put off from the very start of school. The one who reaches out to him is Reika Momoki, a female upperclassman in the Manga Research Club. She’s beautiful and shares his otaku interests, so Hajime quickly falls for her, but Reika has a secret he never could have imagined.",
+            "cover": "library/covers/eb7f8fc2-5913-464c-a36d-d9c8c8a322b0.jpg",
+            "status": "unknown",
+            "sources": [
+                {
+                    "id": "eb7f8fc2-5913-464c-a36d-d9c8c8a322b0",
+                    "name": "MangaDex",
+                    "url": "https://mangadex.org/title/eb7f8fc2-5913-464c-a36d-d9c8c8a322b0"
+                }
+            ],
+            "chapters": []
         }
     ]
 }

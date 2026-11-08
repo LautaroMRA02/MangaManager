@@ -25,7 +25,7 @@ class MangaCard(QFrame):
         self.setObjectName("MangaCard")
         self.setFixedSize(180, 285)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-
+        self.setProperty("selected", False)
         layout = QVBoxLayout(self)
         layout.setContentsMargins(8, 8, 8, 8)
         layout.setSpacing(7)
@@ -77,3 +77,10 @@ class MangaCard(QFrame):
             self.clicked.emit(self.manga_id)
 
         super().mousePressEvent(event)
+    def set_selected(self, selected):
+        self.setProperty("selected", selected)
+
+        self.style().unpolish(self)
+        self.style().polish(self)
+
+        self.update()

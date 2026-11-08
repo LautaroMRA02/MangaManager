@@ -26,7 +26,7 @@ class MangaListItem(QFrame):
         self.setObjectName("MangaListItem")
         self.setFixedHeight(90)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-
+        self.setProperty("selected", False)
         layout = QHBoxLayout(self)
         layout.setContentsMargins(10, 8, 12, 8)
         layout.setSpacing(14)
@@ -71,3 +71,10 @@ class MangaListItem(QFrame):
             self.clicked.emit(self.manga_id)
 
         super().mousePressEvent(event)
+    def set_selected(self, selected):
+        self.setProperty("selected", selected)
+
+        self.style().unpolish(self)
+        self.style().polish(self)
+
+        self.update()

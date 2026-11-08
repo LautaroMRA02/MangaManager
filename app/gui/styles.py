@@ -309,4 +309,282 @@ QLabel#MangaCardOriginal {
     font-size: 11px;
     background: transparent;
 }
+
+/* ========================
+   MANGA LIST ITEMS
+   ======================== */
+
+QFrame#MangaListItem {
+    background-color: #181825;
+    border: 1px solid transparent;
+    border-radius: 9px;
+}
+
+QFrame#MangaListItem:hover {
+    background-color: #242438;
+    border: 1px solid #cba6f7;
+}
+
+QLabel#MangaListCover {
+    background-color: #313244;
+    border-radius: 5px;
+    color: #9399b2;
+}
+
+QLabel#MangaListTitle {
+    color: #cdd6f4;
+    font-size: 14px;
+    font-weight: bold;
+    background: transparent;
+}
+
+QLabel#MangaListOriginal {
+    color: #9399b2;
+    font-size: 11px;
+    background: transparent;
+}
+/* ========================
+   LIBRARY HEADER
+   ======================== */
+
+QLineEdit#LibrarySearch {
+    background-color: #181825;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 9px 12px;
+}
+
+QLineEdit#LibrarySearch:focus {
+    border: 1px solid #cba6f7;
+}
+
+QPushButton#ViewModeButton {
+    background-color: #181825;
+    color: #a6adc8;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 9px 12px;
+}
+
+QPushButton#ViewModeButton:hover {
+    background-color: #313244;
+}
+
+QPushButton#ViewModeButton:checked {
+    background-color: #45405f;
+    color: #cba6f7;
+    border: 1px solid #585b70;
+}
+/* ========================
+   SELECCION DE MANGAS
+   ======================== */
+
+QFrame#MangaCard[selected="true"] {
+    background-color: #242438;
+    border: 1px solid #cba6f7;
+}
+
+QFrame#MangaListItem[selected="true"] {
+    background-color: #242438;
+    border: 1px solid #cba6f7;
+}
+/* =========================
+   MangaView
+========================= */
+
+QLabel#MangaCover {
+    background-color: #181825;
+    border: 1px solid #313244;
+    border-radius: 10px;
+    color: #9399b2;
+}
+
+QGroupBox#MangaSection {
+    background-color: #181825;
+    border: 1px solid #313244;
+    border-radius: 10px;
+    margin-top: 14px;
+    padding: 12px;
+    font-weight: bold;
+}
+
+QGroupBox#MangaSection::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 12px;
+    padding: 0 6px;
+    color: #cba6f7;
+}
+
+QFrame#ChapterCard {
+    background-color: #1e1e2e;
+    border: 1px solid #313244;
+    border-radius: 9px;
+}
+
+QFrame#ChapterCard:hover {
+    border: 1px solid #45405f;
+}
+
+QLabel#ChapterTitle {
+    color: #cdd6f4;
+    font-size: 14px;
+    font-weight: bold;
+    background: transparent;
+}
+
+QLabel#VersionLabel {
+    color: #cdd6f4;
+    background: transparent;
+}
+
+QLabel#VersionStatus {
+    color: #a6adc8;
+    background: transparent;
+}
+
+QPushButton#Secondary {
+    background-color: #313244;
+    color: #cdd6f4;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 7px 10px;
+}
+
+QPushButton#Secondary:hover {
+    background-color: #45405f;
+    border: 1px solid #585b70;
+}
+
+QPushButton#Danger {
+    background-color: #313244;
+    color: #f38ba8;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding: 7px 10px;
+}
+
+QPushButton#Danger:hover {
+    background-color: #49283a;
+    border: 1px solid #f38ba8;
+}
+QPushButton#BackButton {
+    background-color: #313244;
+    color: #cdd6f4;
+    border: 1px solid #45405f;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-weight: bold;
+}
+
+QPushButton#BackButton:hover {
+    background-color: #45405f;
+    border: 1px solid #cba6f7;
+    color: #cba6f7;
+}
+
+QPushButton#BackButton:pressed {
+    background-color: #585b70;
+}
+QListWidget#MangaTitlesList {
+    background: transparent;
+    border: none;
+    padding: 2px;
+    outline: none;
+}
+
+QListWidget#MangaTitlesList::item {
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 5px;
+    padding: 5px 8px;
+    margin: 1px 0;
+}
+
+QListWidget#MangaTitlesList::item:hover {
+    background-color: #313244;
+}
+
+QListWidget#MangaTitlesList::item:selected {
+    background-color: #45405f;
+    color: #cba6f7;
+}
+QFrame#ChapterSeparator {
+    background-color: #313244;
+    border: none;
+    max-height: 1px;
+}
+/* Estados de versiones */
+
+QLabel#VersionStatus[status="pending"] {
+    color: #f9e2af;
+    background-color: #45405f;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+QLabel#VersionStatus[status="downloading"] {
+    color: #89dceb;
+    background-color: #263b4d;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+QLabel#VersionStatus[status="completed"] {
+    color: #a6e3a1;
+    background-color: #263b35;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+QLabel#VersionStatus[status="error"] {
+    color: #f38ba8;
+    background-color: #49283a;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+/* Scroll de MangaView */
+
+QScrollBar:vertical {
+    background-color: #181825;
+    width: 10px;
+    border: none;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #45405f;
+    border-radius: 5px;
+    min-height: 35px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #585b70;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+
+QLabel#MangaDetailTitle {
+    color: #CDD6F4;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+QLabel#MangaStatus {
+    background-color: #313244;
+    color: #CBA6F7;
+    border: 1px solid #45475A;
+    border-radius: 6px;
+    padding: 5px 10px;
+    max-width:200px;
+}
+
 """

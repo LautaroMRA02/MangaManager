@@ -24,6 +24,7 @@ from PySide6.QtGui import (
 
 
 from app.gui.components.manga_card import MangaCard
+from app.gui.components.manga_list_item import MangaListItem
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
@@ -43,18 +44,31 @@ class LibraryView(QWidget):
         layout.setContentsMargins(25, 25, 25, 25)
         layout.setSpacing(15)
 
-        # Encabezado.
+        # Encabezado
         header = QHBoxLayout()
+        header.setSpacing(10)
 
-        title = QLabel("biblioteca")
+        title = QLabel("Biblioteca")
         title.setObjectName("SectionTitle")
 
         header.addWidget(title)
         header.addStretch()
 
-        # Selector de visualización.
+        # Búsqueda
+        self.search = QLineEdit()
+        self.search.setObjectName("LibrarySearch")
+        self.search.setPlaceholderText("Buscar manga...")
+        self.search.setFixedWidth(230)
+        self.search.textChanged.connect(self.render)
+
+        header.addWidget(self.search)
+
+        # Selector de visualización
         self.list_button = QPushButton("Lista")
         self.grid_button = QPushButton("Cuadrícula")
+
+        self.list_button.setObjectName("ViewModeButton")
+        self.grid_button.setObjectName("ViewModeButton")
 
         self.list_button.setCheckable(True)
         self.grid_button.setCheckable(True)
@@ -75,16 +89,16 @@ class LibraryView(QWidget):
         header.addWidget(self.list_button)
         header.addWidget(self.grid_button)
 
+        # Agregar manga
         add_button = QPushButton("+ Agregar manga")
         add_button.setObjectName("Primary")
         add_button.clicked.connect(self.add_requested.emit)
 
         header.addWidget(add_button)
-
         # Búsqueda.
-        self.search = QLineEdit()
-        self.search.setPlaceholderText("Buscar por nombre...")
-        self.search.textChanged.connect(self.render)
+        # self.search = QLineEdit()
+        # self.search.setPlaceholderText("Buscar por nombre...")
+        # self.search.textChanged.connect(self.render)
 
         # Biblioteca.
         self.list = QListWidget()
@@ -93,17 +107,34 @@ class LibraryView(QWidget):
         self.list.setUniformItemSizes(True)
 
         self.list.itemClicked.connect(self._on_item_clicked)
+        self.list.currentItemChanged.connect(
+            self._on_current_item_changed
+        )
 
+        self.cards = {}
+        # layout.addLayout(header)
+        # layout.addWidget(self.search)
+        # layout.addWidget(self.list)
         layout.addLayout(header)
-        layout.addWidget(self.search)
+        layout.addSpacing(10)
         layout.addWidget(self.list)
-
         self.set_view_mode("list")
 
     def _on_item_clicked(self, item):
         manga_id = item.data(Qt.ItemDataRole.UserRole)
         self.manga_selected.emit(manga_id)
+    def _on_current_item_changed(self, current, previous):
+        if previous:
+            previous_widget = self.list.itemWidget(previous)
 
+            if previous_widget:
+                previous_widget.set_selected(False)
+
+        if current:
+            current_widget = self.list.itemWidget(current)
+
+            if current_widget:
+                current_widget.set_selected(True)
     def load_mangas(self, mangas, preferred_languages):
         self.mangas = mangas
         self.preferred_languages = preferred_languages
@@ -201,7 +232,7 @@ class LibraryView(QWidget):
 
     def render(self):
         self.list.clear()
-
+        self.cards.clear()
         query = self.search.text().strip().lower()
 
         for manga in self.mangas:
@@ -239,7 +270,7 @@ class LibraryView(QWidget):
                     original_title=original_name,
                     cover=cover
                 )
-
+                self.cards[manga.id] = card
                 card.clicked.connect(
                     self.manga_selected.emit
                 )
@@ -247,20 +278,25 @@ class LibraryView(QWidget):
                 self.list.setItemWidget(item, card)
 
             else:
-                # Vista de lista tradicional
-                text = title
-
-                if original_name and original_name != title:
-                    text += f"  ·  Original: {original_name}"
-
-                item = QListWidgetItem(text)
+                item = QListWidgetItem()
 
                 item.setData(
                     Qt.ItemDataRole.UserRole,
                     manga.id
                 )
 
-                item.setSizeHint(QSize(0, 40))
-                item.setToolTip(title)
-
+                item.setSizeHint(QSize(0, 90))
                 self.list.addItem(item)
+
+                card = MangaListItem(
+                    manga_id=manga.id,
+                    title=title,
+                    original_title=original_name,
+                    cover=self._get_cover(manga)
+                )
+                self.cards[manga.id] = card
+                card.clicked.connect(
+                    self.manga_selected.emit
+                )
+
+                self.list.setItemWidget(item, card)

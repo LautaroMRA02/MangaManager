@@ -11,7 +11,8 @@ from PySide6.QtWidgets import (
     QGroupBox,
     QScrollArea,
     QSizePolicy,
-    QListWidgetItem
+    QListWidgetItem,
+    QFrame
 )
 from PySide6.QtCore import Signal, Qt, QSize
 from PySide6.QtGui import QPixmap, QPainter, QColor, QFont
@@ -39,72 +40,78 @@ class MangaView(QWidget):
         self.current_manga = None
 
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(25, 20, 25, 25)
-        main_layout.setSpacing(15)
+        main_layout.setContentsMargins(28, 22, 28, 28)
+        main_layout.setSpacing(12)
 
         # Botón volver.
-        back_button = QPushButton("< Volver a biblioteca")
+        back_button = QPushButton("←  Biblioteca")
+        back_button.setObjectName("BackButton")
+        back_button.setCursor(Qt.CursorShape.PointingHandCursor)
         back_button.clicked.connect(self.back_requested.emit)
-        main_layout.addWidget(back_button, alignment=Qt.AlignmentFlag.AlignLeft)
-
+        back_button.setFixedHeight(36)
+        back_button.setFixedWidth(150)
+        main_layout.addWidget(
+            back_button,
+            alignment=Qt.AlignmentFlag.AlignLeft
+        )
         # Área desplazable.
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
         self.scroll.setFrameShape(QScrollArea.Shape.NoFrame)
 
         self.scroll.setVerticalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+            Qt.ScrollBarPolicy.ScrollBarAsNeeded
         )
-
         self.scroll.setHorizontalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAlwaysOff
         )
+
         self.scroll.setStyleSheet("""
             QScrollArea {
-                background-color: #111318;
+                background: transparent;
                 border: none;
             }
+
             QScrollArea > QWidget > QWidget {
-                background-color: #111318;
+                background: transparent;
             }
         """)
 
         self.scroll.viewport().setStyleSheet(
-            "background-color: #111318;"
+            "background: transparent;"
         )
-
         content = QWidget()
         content.setObjectName("MangaContent")
         content.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         content.setStyleSheet("""
             QWidget#MangaContent {
-                background-color: #111318;
+                background: transparent;
             }
         """)
         layout = QVBoxLayout(content)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(18)
+        layout.setContentsMargins(0, 0, 8, 0)
+        layout.setSpacing(22)
+
+        # Información principal.
+
+        # Información principal.
 
         # Información principal.
         info_layout = QHBoxLayout()
         info_layout.setSpacing(22)
 
+        # Portada.
         self.cover = QLabel()
-        self.cover.setFixedSize(200, 280)
+        self.cover.setObjectName("MangaCover")
+        self.cover.setFixedSize(160, 225)
         self.cover.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.cover.setStyleSheet("""
-            QLabel {
-                background-color: #20232D;
-                border-radius: 8px;
-                color: #9295A0;
-            }
-        """)
 
+        # Información.
         details_layout = QVBoxLayout()
         details_layout.setSpacing(10)
 
         self.title = QLabel("Manga")
-        self.title.setObjectName("SectionTitle")
+        self.title.setObjectName("MangaDetailTitle")
         self.title.setWordWrap(True)
 
         self.original_label = QLabel()
@@ -112,7 +119,11 @@ class MangaView(QWidget):
         self.original_label.setWordWrap(True)
 
         self.status_label = QLabel("Estado: Desconocido")
-        self.status_label.setObjectName("Muted")
+        self.status_label.setObjectName("MangaStatus")
+        self.status_label.setAlignment(
+            Qt.AlignmentFlag.AlignLeft |
+            Qt.AlignmentFlag.AlignVCenter
+        )
 
         description_title = QLabel("Descripción")
         description_title.setObjectName("SectionTitle")
@@ -120,7 +131,8 @@ class MangaView(QWidget):
         self.description = QLabel()
         self.description.setWordWrap(True)
         self.description.setAlignment(
-            Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft
+            Qt.AlignmentFlag.AlignTop |
+            Qt.AlignmentFlag.AlignLeft
         )
         self.description.setSizePolicy(
             QSizePolicy.Policy.Expanding,
@@ -130,6 +142,7 @@ class MangaView(QWidget):
         details_layout.addWidget(self.title)
         details_layout.addWidget(self.original_label)
         details_layout.addWidget(self.status_label)
+        details_layout.addSpacing(6)
         details_layout.addWidget(description_title)
         details_layout.addWidget(self.description)
         details_layout.addStretch()
@@ -139,24 +152,41 @@ class MangaView(QWidget):
 
         layout.addLayout(info_layout)
 
+
+
+
         # Títulos alternativos.
         titles_group = QGroupBox("Títulos e idiomas")
+        titles_group.setObjectName("MangaSection")
+
         titles_layout = QVBoxLayout(titles_group)
+        titles_layout.setContentsMargins(12, 12, 12, 12)
+        titles_layout.setSpacing(4)
+
         self.titles_list = QListWidget()
+        self.titles_list.setObjectName("MangaTitlesList")
         self.titles_list.setVerticalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAlwaysOff
         )
         self.titles_list.setHorizontalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAlwaysOff
         )
-        self.titles_list.setMaximumHeight(150)
+        self.titles_list.setMinimumHeight(0)
+        self.titles_list.setMaximumHeight(16777215)
+        self.titles_list.setSpacing(4)
+        self.titles_list.setUniformItemSizes(True)
 
+        self.titles_list.setVerticalScrollBarPolicy(
+            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+        )
         titles_layout.addWidget(self.titles_list)
         layout.addWidget(titles_group)
+
 
         # Capítulos.
 
         chapters_group = QGroupBox("Capítulos")
+        chapters_group.setObjectName("MangaSection")
         chapters_layout = QVBoxLayout(chapters_group)
         chapters_layout.setSpacing(12)
 
@@ -173,24 +203,11 @@ class MangaView(QWidget):
             self.chapters_container
         )
         self.chapters_container_layout.setContentsMargins(0, 0, 0, 0)
-        self.chapters_container_layout.setSpacing(10)
+        self.chapters_container_layout.setSpacing(12)
 
         chapters_layout.addWidget(self.chapters_container)
 
         layout.addWidget(chapters_group)
-
-
-        # self.chapters_list = QListWidget()
-        # self.chapters_list.setVerticalScrollBarPolicy(
-        #     Qt.ScrollBarPolicy.ScrollBarAlwaysOff
-        # )
-        # self.chapters_list.setHorizontalScrollBarPolicy(
-        #     Qt.ScrollBarPolicy.ScrollBarAlwaysOff
-        # )
-        # self.chapters_list.setMinimumHeight(220)
-
-        # chapters_layout.addWidget(self.chapters_list)
-        # layout.addWidget(chapters_group)
 
         self.scroll.setWidget(content)
         main_layout.addWidget(self.scroll)
@@ -201,7 +218,7 @@ class MangaView(QWidget):
 
     def _default_cover(self):
         pixmap = QPixmap(300, 420)
-        pixmap.fill(QColor("#20232D"))
+        pixmap.fill(QColor("#181825"))
 
         painter = QPainter(pixmap)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
@@ -209,7 +226,7 @@ class MangaView(QWidget):
         painter.setPen(QColor("#7656E8"))
         painter.drawRoundedRect(15, 15, 270, 390, 15, 15)
 
-        painter.setPen(QColor("#9295A0"))
+        painter.setPen(QColor("#cba6f7"))
 
         font = QFont()
         font.setPointSize(25)
@@ -246,7 +263,7 @@ class MangaView(QWidget):
 
         self.cover.setPixmap(
             pixmap.scaled(
-                QSize(200, 280),
+                QSize(160, 225),
                 Qt.AspectRatioMode.KeepAspectRatio,
                 Qt.TransformationMode.SmoothTransformation
             )
@@ -276,7 +293,29 @@ class MangaView(QWidget):
         }
 
         return statuses.get(status, status.capitalize())
+    def _adjust_titles_height(self):
+        count = self.titles_list.count()
 
+        if count == 0:
+            self.titles_list.setFixedHeight(0)
+            return
+        row_height = self.titles_list.sizeHintForRow(0)
+
+        if row_height <= 0:
+            row_height = 30
+
+        spacing = self.titles_list.spacing()
+        margins = self.titles_list.contentsMargins()
+
+        total_height = (
+            count * row_height
+            + max(0, count - 1) * spacing
+            + margins.top()
+            + margins.bottom()
+            + 8
+        )
+
+        self.titles_list.setFixedHeight(total_height)
     # --------------------------------------------------
     # Cargar manga
     # --------------------------------------------------
@@ -321,7 +360,7 @@ class MangaView(QWidget):
             self.titles_list.addItem(
                 f"{title.language.upper()} · {title.name}{marker}"
             )
-
+        self._adjust_titles_height()
         # Mostrar capítulos agrupados con sus versiones.
         self.render_chapters(manga)
 
@@ -341,37 +380,67 @@ class MangaView(QWidget):
         if not manga.chapters:
             empty = QLabel("Todavía no hay capítulos registrados.")
             empty.setObjectName("Muted")
+            empty.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            empty.setMinimumHeight(60)
             self.chapters_container_layout.addWidget(empty)
             return
 
         for chapter in manga.chapters:
-            chapter_card = QGroupBox(
-                f"Capítulo {chapter.number} · {chapter.title or 'Sin título'}"
+            # Tarjeta del capítulo.
+            chapter_card = QFrame()
+            chapter_card.setObjectName("ChapterCard")
+            chapter_card.setSizePolicy(
+                QSizePolicy.Policy.Expanding,
+                QSizePolicy.Policy.Minimum
             )
-
             card_layout = QVBoxLayout(chapter_card)
-            card_layout.setSpacing(8)
+            card_layout.setContentsMargins(16, 14, 16, 14)
+            card_layout.setSpacing(12)
 
-            # Versiones del capítulo.
+            # Encabezado.
+            header = QHBoxLayout()
+
+            chapter_title = QLabel(
+                f"Capítulo {chapter.number} · "
+                f"{chapter.title or 'Sin título'}"
+            )
+            chapter_title.setObjectName("ChapterTitle")
+            chapter_title.setWordWrap(True)
+
+            versions_count = QLabel(
+                f"{len(chapter.versions)} versiones"
+            )
+            versions_count.setObjectName("Muted")
+
+            header.addWidget(chapter_title, 1)
+            header.addWidget(versions_count)
+
+            card_layout.addLayout(header)
+
+            # Versiones.
             if chapter.versions:
                 for version in chapter.versions:
-                    status = self._format_version_status(version.status)
-                    progress = (
+                    version_row = QHBoxLayout()
+                    version_row.setSpacing(8)
+
+                    version_label = QLabel(
+                        f"{version.language.upper()} · "
                         f"{version.pages_downloaded}/"
                         f"{version.pages_total} páginas"
                     )
+                    version_label.setObjectName("VersionLabel")
 
-                    version_row = QHBoxLayout()
-
-                    version_label = QLabel(
-                        f"{version.language.upper()} · {progress}"
+                    status_label = QLabel(
+                        self._format_version_status(version.status)
                     )
-
-                    status_label = QLabel(status)
-                    status_label.setObjectName("Muted")
+                    status_label.setObjectName("VersionStatus")
+                    status_label.setProperty("status", version.status)
+                    status_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+                    status_label.setMinimumWidth(95)
 
                     edit_version_button = QPushButton("Editar")
                     edit_version_button.setObjectName("Secondary")
+                    edit_version_button.setFixedWidth(70)
                     edit_version_button.clicked.connect(
                         lambda checked=False,
                         chapter_id=chapter.id,
@@ -383,6 +452,7 @@ class MangaView(QWidget):
 
                     delete_version_button = QPushButton("Eliminar")
                     delete_version_button.setObjectName("Danger")
+                    delete_version_button.setFixedWidth(80)
                     delete_version_button.clicked.connect(
                         lambda checked=False,
                         chapter_id=chapter.id,
@@ -392,8 +462,7 @@ class MangaView(QWidget):
                         )
                     )
 
-                    version_row.addWidget(version_label)
-                    version_row.addStretch()
+                    version_row.addWidget(version_label, 1)
                     version_row.addWidget(status_label)
                     version_row.addWidget(edit_version_button)
                     version_row.addWidget(delete_version_button)
@@ -401,12 +470,19 @@ class MangaView(QWidget):
                     card_layout.addLayout(version_row)
 
             else:
-                empty = QLabel("Todavía no hay versiones.")
-                empty.setObjectName("Muted")
-                card_layout.addWidget(empty)
+                empty_versions = QLabel("Todavía no hay versiones.")
+                empty_versions.setObjectName("Muted")
+                card_layout.addWidget(empty_versions)
 
-            # Botones del capítulo.
-            buttons_layout = QHBoxLayout()
+            # Separador.
+            separator = QFrame()
+            separator.setFrameShape(QFrame.Shape.HLine)
+            separator.setObjectName("ChapterSeparator")
+            card_layout.addWidget(separator)
+
+   
+            # Acciones de versiones.
+            version_actions = QHBoxLayout()
 
             add_version_button = QPushButton("+ Agregar versión")
             add_version_button.setObjectName("Secondary")
@@ -414,6 +490,14 @@ class MangaView(QWidget):
                 lambda checked=False, chapter_id=chapter.id:
                 self.add_version_requested.emit(chapter_id)
             )
+
+            version_actions.addWidget(add_version_button)
+            version_actions.addStretch()
+
+            card_layout.addLayout(version_actions)
+
+            # Acciones del capítulo.
+            chapter_actions = QHBoxLayout()
 
             edit_chapter_button = QPushButton("Editar capítulo")
             edit_chapter_button.setObjectName("Secondary")
@@ -429,15 +513,14 @@ class MangaView(QWidget):
                 self.delete_chapter_requested.emit(chapter_id)
             )
 
-            buttons_layout.addWidget(add_version_button)
-            buttons_layout.addStretch()
-            buttons_layout.addWidget(edit_chapter_button)
-            buttons_layout.addWidget(delete_chapter_button)
+            chapter_actions.addWidget(edit_chapter_button)
+            chapter_actions.addWidget(delete_chapter_button)
+            chapter_actions.addStretch()
 
-            card_layout.addLayout(buttons_layout)
+            card_layout.addLayout(chapter_actions)
+
 
             self.chapters_container_layout.addWidget(chapter_card)
 
         self.chapters_container_layout.addStretch()
-
 
